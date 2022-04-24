@@ -1,0 +1,45 @@
+{
+  "name": "sauna",
+  "description": "CLI tool to show the available updates for npm packages, sorted and colored by type. First come the patch updates, then the minor updated, and last come the major updates (according to Sem.Ver. conventions).",
+  "version": "0.0.1",
+  "main": "main/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nikensss/sauna"
+  },
+  "author": "Ricard Mallafre",
+  "devDependencies": {
+    "@commitlint/cli": "16.2.3",
+    "@commitlint/config-conventional": "16.2.1",
+    "@typescript-eslint/eslint-plugin": "5.20.0",
+    "@typescript-eslint/parser": "5.20.0",
+    "eslint": "8.13.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "husky": "7.0.4",
+    "prettier": "2.6.2",
+    "rimraf": "3.0.2",
+    "ts-node": "10.7.0",
+    "typescript": "4.6.3"
+  },
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "pretty": "prettier --write 'src/**/*.ts'",
+    "pretty:check": "prettier --check 'src/**/*.ts'",
+    "lint": "eslint 'src/**/*.ts'",
+    "prepare": "husky install",
+    "prebuild": "rimraf ./dist",
+    "build": "tsc",
+    "postbuild": "npm un -g sauna && npm i -g"
+  },
+  "bin": {
+    "sauna": "dist/index.js"
+  },
+  "dependencies": {
+    "chalk": "4.1.2"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "license": "MIT"
+}
