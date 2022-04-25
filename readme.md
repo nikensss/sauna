@@ -18,6 +18,30 @@ updates (according to Sem.Ver. conventions).
 1. You should have a `sauna` command available on your console. Run it from the
    Node.Js app that you want to check for updates.
 
+# Options
+
+## `-p`, `--path`
+
+The `path` to run in:
+
+```bash
+sauna -p "~/repos/sauna"
+sauna --path "~/repos/sauna"
+```
+
+If not specified, the current dirctory will be used.
+
+## `-i`, `--ignore`
+
+The packages with updates that should be excluded from the update commands.
+These will still be visible in the list of available updates, but will not be
+added to the update commands.
+
+```bash
+sauna -i axios @types/node
+sauna -ignore axios @types/node
+```
+
 # Colors
 
 blue = patch updates

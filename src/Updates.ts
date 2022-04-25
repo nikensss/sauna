@@ -5,8 +5,9 @@ import { Package } from './Package.js';
 export class Updates {
   private readonly packages: Package[];
 
-  constructor(packages: readonly Package[]) {
-    this.packages = [...packages];
+  constructor(packages: readonly Package[], ignored: string[] = []) {
+    const isIgnored = (p: Package) => ignored.includes(p.getName());
+    this.packages = [...packages.filter(p => !isIgnored(p))];
   }
 
   get major(): Package[] {

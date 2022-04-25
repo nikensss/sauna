@@ -28,7 +28,7 @@ const main = async () => {
     });
   console.log(packages.map(p => p.toString()).join('\n'));
 
-  const updates = new Updates(packages);
+  const updates = new Updates(packages, options.ignore);
 
   const { patch, minor, major } = updates.getUpdateCommands();
 
