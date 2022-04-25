@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
+import { options } from './Commander.js';
 import { getPackageInfo } from './get_package_info.js';
 import { Package } from './Package.js';
 import { Updates } from './Updates.js';
 
 const main = async () => {
-  const [, , path] = process.argv;
-  const packages = Object.entries(await getPackageInfo(path))
+  const packages = Object.entries(await getPackageInfo(options.path))
     .map(([name, info]) => new Package(name, info))
     .sort((a, b) => {
       if (!a.hasUpdate() && !b.hasUpdate()) return 0;
