@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import chalk from 'chalk';
-import { Version } from './Version';
+import { Version } from './Version.js';
 
 /**
  * PackageInfo is the data provided by the `npm outdated --json` command.

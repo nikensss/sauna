@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { getPackageInfo } from './get_package_info';
-import { Package } from './Package';
-import { Updates } from './Updates';
+import { getPackageInfo } from './get_package_info.js';
+import { Package } from './Package.js';
+import { Updates } from './Updates.js';
 
 const main = async () => {
   const [, , path] = process.argv;

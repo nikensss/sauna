@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { Package } from './Package';
+import { Package } from './Package.js';
 
 export class Updates {
   private readonly packages: Package[];
