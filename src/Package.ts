@@ -64,6 +64,6 @@ export class Package {
     if (this.isMinorUpdate()) return chalk.yellow(s);
     if (this.isPatchUpdate()) return chalk.blue(s);
 
-    return s;
+    return chalk.bgGrey(s);
   }
 }
