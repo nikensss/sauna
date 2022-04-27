@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
+import { Package } from './Package.js';
 
 const program = new Command();
 
@@ -14,4 +15,18 @@ program
     'The packages with updates that should be ignored (separated by a white space). The packages will be visible in the list of available updates, but the update commands will not include them.'
   );
 
-export const options = program.parse().opts();
+const opts = program.parse().opts();
+
+export interface Options {
+  readonly path: string;
+  readonly ignore: string[];
+  isIgnored: (pkg: Package) => boolean;
+}
+
+export const options: Options = {
+  path: opts.path || '',
+  ignore: opts.ignore || [],
+  isIgnored: (pkg: Package): boolean => {
+    return options.ignore.some(p => pkg.getName().includes(p));
+  }
+};

@@ -26,9 +26,10 @@ const main = async () => {
       console.log({ a, b });
       throw new Error('Invalid version comparison');
     });
+
   console.log(packages.map(p => p.toString()).join('\n'));
 
-  const updates = new Updates(packages, options.ignore);
+  const updates = new Updates(packages);
 
   const { patch, minor, major } = updates.getUpdateCommands();
 

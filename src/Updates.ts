@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
+import { options } from './Commander.js';
 import { Package } from './Package.js';
 
 export class Updates {
   private readonly packages: Package[];
 
-  constructor(packages: readonly Package[], ignored: string[] = []) {
-    const isIgnored = (p: Package) => ignored.includes(p.getName());
-    this.packages = [...packages.filter(p => !isIgnored(p))];
+  constructor(packages: readonly Package[]) {
+    this.packages = [...packages.filter(p => !options.isIgnored(p))];
   }
 
   get major(): Package[] {

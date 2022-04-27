@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import chalk from 'chalk';
+import chalk, { ChalkInstance } from 'chalk';
+import { options } from './Commander.js';
 import { Version } from './Version.js';
 
 /**
@@ -57,13 +58,19 @@ export class Package {
     return this.latestVersion.isPatchUpdate(this.currentVersion);
   }
 
+  private getColor(): ChalkInstance {
+    if (this.isMajorUpdate()) return chalk.red;
+    if (this.isMinorUpdate()) return chalk.yellow;
+    if (this.isPatchUpdate()) return chalk.blue;
+
+    return chalk.bgGrey;
+  }
+
   toString(): string {
     const name = this.name.padEnd(40, ' ');
-    const s = `${name}${this.currentVersion.toString()}\t${this.latestVersion.toString()}`;
-    if (this.isMajorUpdate()) return chalk.red(s);
-    if (this.isMinorUpdate()) return chalk.yellow(s);
-    if (this.isPatchUpdate()) return chalk.blue(s);
+    const s = `${name}${this.currentVersion.toString()}${this.latestVersion.toString()}`;
+    const color = this.getColor();
 
-    return chalk.bgGrey(s);
+    return options.isIgnored(this) ? color.strikethrough(s) : color(s);
   }
 }

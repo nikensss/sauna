@@ -2,7 +2,7 @@
   "type": "module",
   "name": "sauna",
   "description": "CLI tool to show the available updates for npm packages, sorted and colored by type. First come the patch updates, then the minor updated, and last come the major updates (according to Sem.Ver. conventions).",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "main": "main/index.js",
   "repository": {
     "type": "git",
