@@ -57,7 +57,7 @@ const isPackageInfo = (o: unknown): o is Record<string, PackageInfo> => {
 
 export const getPackageInfo = async (path?: string): Promise<Record<string, PackageInfo>> => {
   const spinner = ora().start('getting outdated packages...');
-  const command = (path ? `cd ${path} && ` : '') + 'npm outdated --json';
+  const command = (path ? `cd ${path} && ` : '') + 'npm outdated --json --long';
   try {
     const result = await exec(command);
     spinner.succeed('outdated packages retrieved!');
