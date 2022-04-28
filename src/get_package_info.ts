@@ -33,15 +33,39 @@ const exec = async (command: string): Promise<Record<string, PackageInfo>> => {
   }
 };
 
+const isPackageInfo = (o: unknown): o is Record<string, PackageInfo> => {
+  if (o === null) return false;
+  if (!o) return false;
+  if (typeof o !== 'object') return false;
+
+  const necessaryFields = ['current', 'latest'].sort();
+  const packageInfo = o as Record<string, PackageInfo>;
+
+  for (const [packageName, packageData] of Object.entries(packageInfo)) {
+    const availableFields = Object.keys(packageData).sort();
+
+    // ensure every necessary field is included in the available fields
+    if (!necessaryFields.every(field => availableFields.includes(field))) {
+      console.log(`${packageName} is missing data: ${availableFields.join(', ')}`);
+      console.log(`Expected: ${necessaryFields.join(', ')}`);
+      return false;
+    }
+  }
+
+  return true;
+};
+
 export const getPackageInfo = async (path?: string): Promise<Record<string, PackageInfo>> => {
   const spinner = ora().start('getting outdated packages...');
   const command = (path ? `cd ${path} && ` : '') + 'npm outdated --json';
   try {
     const result = await exec(command);
     spinner.succeed('outdated packages retrieved!');
+    if (!isPackageInfo(result)) throw new Error('Missing properties in result of `npm outdated`');
+
     return result;
   } catch (ex) {
-    spinner.fail(`ex`);
+    spinner.fail(`${ex}`);
     throw ex;
   }
 };
