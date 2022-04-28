@@ -1,22 +1,22 @@
 # sauna
 
-CLI tool to show available updates for npm package, sorted and colored by type.
-First come the patch updates, then the minor updated, and last come the major
-updates (according to Sem.Ver. conventions).
+CLI tool to show available updates for an npm project, sorted and colored by
+type. First come the patch updates, then the minor updates, and last come the
+major updates.
 
 # Getting started
 
 1. Clone the repo
 1. Install dependencies:
    ```bash
-   npm install
+   npm ci
    ```
 1. Build the project:
    ```bash
    npm run build
    ```
-1. You should have a `sauna` command available on your console. Run it from the
-   Node.Js app that you want to check for updates.
+1. You should have a `sauna` command available. Run it from the Node.Js app that
+   you want to check for updates.
 
 # Options
 
@@ -41,6 +41,12 @@ added to the update commands.
 sauna -i axios @types/node
 sauna -ignore axios @types/node
 ```
+
+## `--debug`
+
+If this flag is provided, a log file will be created called `sauna.log` at the
+location where the command is run with execution details. Useful to debug
+issues.
 
 # Colors
 
