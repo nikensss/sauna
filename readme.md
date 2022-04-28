@@ -42,6 +42,12 @@ sauna -i axios @types/node
 sauna -ignore axios @types/node
 ```
 
+## `--debug`
+
+If this flag is provided, a log file will be created called `sauna.log` at the
+location where the command is run with execution details. Useful to debug
+issues.
+
 # Colors
 
 blue = patch updates
