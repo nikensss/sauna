@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import { logger } from './Logger.js';
+
 export class Version {
   private major: number;
   private minor: number;
@@ -7,6 +9,7 @@ export class Version {
   private _raw: string;
 
   constructor(semVer: string) {
+    logger.debug({ semVer }, 'new Version instance');
     const [major, minor, patch] = semVer.split('.').map(n => parseInt(n, 10));
     if (typeof major !== 'number') throw new Error(`Could not figure out major in ${semVer}`);
     if (typeof minor !== 'number') throw new Error(`Could not figure out minor in ${semVer}`);
@@ -20,6 +23,7 @@ export class Version {
   }
 
   isNewerThan(version: Version): boolean {
+    logger.debug({ this: this, other: version }, 'comparing if this is newer than other');
     if (this.major !== version.major) return this.major > version.major;
     if (this.minor !== version.minor) return this.minor > version.minor;
     if (this.patch !== version.patch) return this.patch > version.patch;

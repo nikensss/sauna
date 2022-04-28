@@ -4,8 +4,10 @@ import { options } from './Commander.js';
 import { getPackageInfo } from './get_package_info.js';
 import { Package } from './Package.js';
 import { Updates } from './Updates.js';
+import { logger } from './Logger.js';
 
 const main = async () => {
+  logger.debug('start');
   const packages = Object.entries(await getPackageInfo(options.path))
     .map(([name, info]) => new Package(name, info))
     .sort((a, b) => {
@@ -27,15 +29,20 @@ const main = async () => {
       throw new Error('Invalid version comparison');
     });
 
+  logger.debug('printing list of available updates');
   console.log(packages.map(p => p.toString()).join('\n'));
 
+  logger.debug('creating "Updates" instance');
   const updates = new Updates(packages);
 
+  logger.debug('getting update commands');
   const { patch, minor, major } = updates.getUpdateCommands();
 
+  logger.debug('printing update commands');
   if (patch) console.log(`\nUpdate patches:\n${patch}`);
   if (minor) console.log(`\nUpdate minor:\n${minor}`);
   if (major) console.log(`\nUpdate major:\n${major}`);
+  logger.debug('end');
 };
 
 main().catch(console.error);

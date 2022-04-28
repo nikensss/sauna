@@ -2,6 +2,7 @@
 
 import chalk, { ChalkInstance } from 'chalk';
 import { options } from './Commander.js';
+import { logger } from './Logger.js';
 import { Version } from './Version.js';
 
 /**
@@ -25,6 +26,7 @@ export class Package {
   private latestVersion: Version;
 
   constructor(name: string, packageInfo: PackageInfo) {
+    logger.debug({ name, packageInfo }, 'new Package instance');
     this.name = name;
     this.currentVersion = new Version(packageInfo.current);
     this.latestVersion = new Version(packageInfo.latest);
