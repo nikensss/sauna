@@ -1,12 +1,18 @@
 {
   "type": "module",
-  "name": "sauna",
+  "name": "@nikensss/sauna",
   "description": "CLI tool to show the available updates for npm packages, sorted and colored by type. First come the patch updates, then the minor updated, and last come the major updates (according to Sem.Ver. conventions).",
-  "version": "1.3.1",
-  "main": "main/index.js",
+  "version": "1.3.2",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/nikensss/sauna"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "author": "Ricard Mallafre",
   "devDependencies": {
@@ -26,13 +32,14 @@
   },
   "scripts": {
     "start": "ts-node src/index.ts",
+    "test": "exit 0",
     "pretty": "prettier --write 'src/**/*.ts'",
     "pretty:check": "prettier --check 'src/**/*.ts'",
     "lint": "eslint 'src/**/*.ts'",
     "prepare": "husky install",
     "prebuild": "rimraf ./dist",
     "build": "tsc",
-    "postbuild": "npm un -g sauna && npm i -g"
+    "inst": "npm run build && npm un -g sauna && npm i -g"
   },
   "bin": {
     "sauna": "dist/index.js"
