@@ -16,17 +16,17 @@
   },
   "author": "Ricard Mallafre",
   "devDependencies": {
-    "@commitlint/cli": "16.2.3",
-    "@commitlint/config-conventional": "16.2.1",
-    "@types/node": "16.11.31",
+    "@commitlint/cli": "17.4.4",
+    "@commitlint/config-conventional": "17.4.4",
+    "@types/node": "18.14.6",
     "@typescript-eslint/eslint-plugin": "5.54.0",
     "@typescript-eslint/parser": "5.54.0",
     "eslint": "8.35.0",
     "eslint-config-prettier": "8.6.0",
     "eslint-plugin-prettier": "4.2.1",
-    "husky": "7.0.4",
+    "husky": "8.0.3",
     "prettier": "2.8.4",
-    "rimraf": "3.0.2",
+    "rimraf": "4.3.0",
     "ts-node": "10.9.1",
     "typescript": "4.9.5"
   },
@@ -39,16 +39,16 @@
     "prepare": "husky install",
     "prebuild": "rimraf ./dist",
     "build": "tsc",
-    "inst": "npm run build && npm un -g sauna && npm i -g"
+    "inst": "npm run build && npm un -g @nikensss/sauna && npm i -g"
   },
   "bin": {
     "sauna": "dist/index.js"
   },
   "dependencies": {
     "chalk": "5.2.0",
-    "commander": "9.2.0",
+    "commander": "10.0.0",
     "ora": "6.1.2",
-    "pino": "7.11.0"
+    "pino": "8.11.0"
   },
   "engines": {
     "node": ">=16"
