@@ -1,35 +1,29 @@
 # sauna
 
-CLI tool to show available updates for an npm project, sorted and colored by
-type. First come the patch updates, then the minor updates, and last come the
+CLI tool to show available updates for an `npm` project, sorted and colored by
+type. First the patch updates are shown, then the minor updates, and then the
 major updates.
 
-# Getting started
+# Install
 
-1. Clone the repo
-1. Install dependencies:
-   ```bash
-   npm ci
-   ```
-1. Build the project:
-   ```bash
-   npm run build
-   ```
-1. You should have a `sauna` command available. Run it from the Node.Js app that
-   you want to check for updates.
+```bash
+npm i -g @nikensss/sauna
+```
+
+This will enable the `sauna` command on your terminal.
 
 # Options
 
 ## `-p`, `--path`
 
-The `path` to run in:
+The `path` to run on:
 
 ```bash
 sauna -p "~/repos/sauna"
 sauna --path "~/repos/sauna"
 ```
 
-If not specified, the current dirctory will be used.
+If not specified, the current directory will be used.
 
 ## `-i`, `--ignore`
 
@@ -39,7 +33,7 @@ added to the update commands.
 
 ```bash
 sauna -i axios @types/node
-sauna -ignore axios @types/node
+sauna --ignore axios @types/node
 ```
 
 ## `--debug`
