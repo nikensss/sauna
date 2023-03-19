@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 import { options } from './Commander.js';
-import { getPackageInfo } from './get_package_info.js';
+import { logger } from './Logger.js';
 import { Package } from './Package.js';
 import { Updates } from './Updates.js';
-import { logger } from './Logger.js';
+import { getPackageInfo } from './getPackageInfo.js';
 
 const main = async () => {
   logger.debug('start');
