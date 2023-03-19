@@ -46,7 +46,7 @@ const isPackageInfo = (o: unknown): o is Record<string, PackageInfo> => {
   if (!o) return false;
   if (typeof o !== 'object') return false;
 
-  const necessaryFields = ['current', 'latest'].sort();
+  const necessaryFields = ['current', 'latest'];
   const packageInfo = o as Record<string, PackageInfo>;
 
   for (const [packageName, packageData] of Object.entries(packageInfo)) {
