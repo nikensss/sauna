@@ -5,24 +5,27 @@ import ora from 'ora';
 import { promisify } from 'util';
 import { logger } from './Logger.js';
 import { PackageInfo } from './Package.js';
+import { z } from 'zod';
 
-export interface CommandError {
-  killed: boolean;
-  code: number;
-  signal: string | null;
-  cmd: string;
-  stdout: string;
-  stderr: string;
-}
+const commandErrorValidator = z.object({
+  killed: z.boolean(),
+  code: z.number(),
+  signal: z.string().nullable(),
+  cmd: z.string(),
+  stdout: z.string(),
+  stderr: z.string()
+});
+
+export type CommandError = z.infer<typeof commandErrorValidator>;
 
 const isCommandError = (err: unknown): err is CommandError => {
   logger.debug('checking if command execution failed');
-  const commandError = err as CommandError;
-  if (typeof commandError.stdout !== 'string') return false;
-  if (typeof commandError.stderr !== 'string') return false;
 
-  logger.debug('not a command error');
-  return true;
+  const isValid = commandErrorValidator.safeParse(err).success;
+
+  logger.debug((isValid ? 'not a ' : '') + 'command error');
+
+  return isValid;
 };
 
 const exec = async (command: string): Promise<Record<string, PackageInfo>> => {
